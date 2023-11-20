@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import titleImage from '../Assets/project-image.png'
 import ProjectCard from '../Components/ProjectCard'
 import { Link } from 'react-router-dom'
 
 function Home() {
+    const [loggedin,setLoggedin] = useState(false)
+    useEffect(()=>{
+        if (sessionStorage.getItem("token")) {
+            setLoggedin(true)
+        }else{
+            setLoggedin(false)
+        }
+    },[])
   return (
     <>
     {/* landing page */}
@@ -13,7 +21,12 @@ function Home() {
                 <Col sm={12} md={6}>
                     <h1 style={{fontSize:'80px',color:'white'}}><i className='fa-brands fa-stack-overflow fa-bounce'></i>Project Fair</h1>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim nulla temporibus sunt tempora esse fugiat obcaecati repudiandae commodi soluta, minima repellendus consequuntur laudantium possimus. Et illo iste minus aliquam quod.</p>
-                    <Link to={'/login'} className='btn btn-warning'>start to explore <i className='fa-solid fa-right-long fa-beat ms-2'></i></Link>
+                   
+                   { loggedin? 
+                   <Link to={'/dashboard'} className='btn btn-warning'>Manage Your Projects<i className='fa-solid fa-right-long fa-beat ms-2'></i></Link>:
+
+                    <Link to={'/login'} className='btn btn-warning'>start to explore <i className='fa-solid fa-right-long fa-beat ms-2'></i></Link>}
+
                 </Col>
                 <Col sm={12} md={6}>
                     <img style={{marginTop:'100px'}} className='w-100' src={titleImage} alt=""/>

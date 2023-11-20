@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 function Header({insideDashboard}) {
     return (
-        <Navbar style={{ backgroundColor: '#90ee90'}} className="position-fixed top-0 w-100 ">
+        <Navbar style={{ backgroundColor: '#90ee90'}} className="position-fixed top-0 w-100 z-1">
             <Container>
                 <Navbar.Brand>
                     <Link to={'/'} style={{ textDecoration: 'none', color: 'white' }} className='fw-bolder fs-4'><i className="fa-brands fa-stack-overflow fa-bounce"></i>Project Fair</Link>
