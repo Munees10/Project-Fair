@@ -3,15 +3,30 @@ import { Col, Row } from 'react-bootstrap'
 import titleImage from '../Assets/project-image.png'
 import ProjectCard from '../Components/ProjectCard'
 import { Link } from 'react-router-dom'
+import { homeProjectAPI } from '../Services/allAPI'
 
 function Home() {
     const [loggedin,setLoggedin] = useState(false)
+    const [homeProjects,setHomeprojects] = useState([])
+
+    const getHomeProjects = async()=>{
+        const result = await homeProjectAPI()
+        if(result.status===200){
+            setHomeprojects(result.data)
+        }else{
+            console.log(result);
+            console.log(result.response.data);
+        }
+    }
+
     useEffect(()=>{
         if (sessionStorage.getItem("token")) {
             setLoggedin(true)
         }else{
             setLoggedin(false)
         }
+        //api call
+        getHomeProjects()
     },[])
   return (
     <>
@@ -41,15 +56,12 @@ function Home() {
         <h1 className="text-center mb-5">Explore Our Projects</h1>
         <marquee scrollAmount={20}>
             <div className='d-flex justify-content-between'>
-                <div className='ms-5' style={{width:'500px'}}>
-                    <ProjectCard/>
+                {homeProjects?.length>0?homeProjects.map(project=>(
+                    <div className='me-5' style={{width:'500px'}}>
+                    <ProjectCard project={project}/>
                 </div>
-                <div className='ms-5' style={{width:'500px'}}>
-                    <ProjectCard/>
-                </div>
-                <div className='ms-5' style={{width:'500px'}}>
-                    <ProjectCard/>
-                </div>
+                )):null
+                }
             </div>
         </marquee>
         <div className="text-center mt-5">
