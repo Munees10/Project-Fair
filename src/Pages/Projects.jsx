@@ -5,6 +5,7 @@ import ProjectCard from '../Components/ProjectCard'
 import { allProjectsAPI } from '../Services/allAPI'
 
 function Projects() {
+  const [searchKey,setSearchKey] = useState("")
   const [allProjects,setAllProjects] = useState([])
   const getAllProjects = async ()=>{
     if(sessionStorage.getItem("token")){
@@ -12,7 +13,7 @@ function Projects() {
       const reqHeader = {
         "Content-Type":"application/json", "Authorization":`Bearer ${token}`
       }
-      const result = await allProjectsAPI(reqHeader)
+      const result = await allProjectsAPI(searchKey,reqHeader)
       if(result.status===200){
         setAllProjects(result.data)
       }else{
@@ -23,7 +24,7 @@ function Projects() {
 
   useEffect(()=>{
     getAllProjects()
-  },[])
+  },[searchKey])
   return (
     <>
       <Header/>
@@ -31,7 +32,7 @@ function Projects() {
         <h1 className='text-center mb-5'>All projects</h1>
         <div className="d-flex justify-content-center align-items-center w-100">
           <div className="d-flex border w-50">
-            <input type="text" className='form-control' placeholder='search projects by technologies used' />
+            <input type="text" className='form-control' placeholder='search projects by technologies used' onChange={e=>setSearchKey(e.target.value)}/>
             <i style={{marginLeft:'-50px'}} class="fa-solid fa-magnifying-glass fa-rotate-90"></i>
           </div>
         </div>
@@ -40,7 +41,8 @@ function Projects() {
             <Col sm={12} md={6} lg={4}>
             <ProjectCard project={project}/>
           </Col>
-          )):null}
+          )):null
+          }
         </Row>
       </div>
     </>

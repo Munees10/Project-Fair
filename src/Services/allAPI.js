@@ -12,8 +12,8 @@ export const loginAPI  = async (user)=>{
 }
 
 //Add Projects
-export const addProjectAPI = async (reqbody,reqHeader)=>{
-    return await commonAPI("POST",`${BASE_URL}/project/add`,reqbody,reqHeader)
+export const addProjectAPI = async (reqBody,reqHeader)=>{
+    return await commonAPI("POST",`${BASE_URL}/project/add`,reqBody,reqHeader)
 
 }
 
@@ -24,7 +24,18 @@ export const homeProjectAPI = async ()=>{
 }
 
 //all project
-export const allProjectsAPI = async (reqHeader)=>{
-    return await commonAPI("GET",`${BASE_URL}/projects/all`,"",reqHeader)
+export const allProjectsAPI = async (searchKey,reqHeader)=>{
+    return await commonAPI("GET",`${BASE_URL}/projects/all?search=${searchKey}`,"",reqHeader)
 
+}
+
+//userProjects
+export const userProjectAPI = async (reqHeader)=>{
+    return await commonAPI("GET",`${BASE_URL}/user/all-projects`,"",reqHeader)
+
+}
+
+//edit projects
+export const editProjectAPI = async (projectId,reqBody,reqHeader)=>{
+    return await commonAPI("PUT",`${BASE_URL}/projects/edit/${projectId}`,reqBody,reqHeader)
 }

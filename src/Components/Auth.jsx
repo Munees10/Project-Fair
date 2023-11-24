@@ -88,11 +88,11 @@ function Auth({ register }) {
                                     {
                                         isRegisterForm ?
                                             <div>
-                                                <button onClick={(e)=>handleRegister(e)} className='btn btn-light mb-2'>Register</button>
+                                                <button onClick={handleRegister} className='btn btn-light mb-2'>Register</button>
                                                 <p>already have an account? click here to login <Link to={'/login'}>Login</Link></p>
                                             </div> :
                                             <div>
-                                                <button onClick={(e)=>handleLogin(e)} className='btn btn-light mb-2'>Login</button>
+                                                <button onClick={handleLogin} className='btn btn-light mb-2'>Login</button>
                                                 <p>New User? click here to  <Link to={'/register'}>Register</Link></p>
                                             </div>
                                     }

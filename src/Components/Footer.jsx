@@ -15,9 +15,9 @@ function Footer() {
       </div>
       <div style={{ color: "white" }} className="links d-flex flex-column p-1">
         <h4 style={{color: "white"}}>Links</h4>
-        <Link to={'/'} style={{ textDecoration: "none", color: "white" }}>Login</Link>
-        <Link to={'/wishlist'} style={{ textDecoration: "none", color: "white" }}>Home</Link>
-        <Link to={'/cart'} style={{ textDecoration: "none", color: "white" }}>Register</Link>
+        <Link to={'/login'} style={{ textDecoration: "none", color: "white" }}>Login</Link>
+        <Link to={'/'} style={{ textDecoration: "none", color: "white" }}>Home</Link>
+        <Link to={'/register'} style={{ textDecoration: "none", color: "white" }}>Register</Link>
       
 
 
