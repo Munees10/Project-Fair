@@ -52,8 +52,7 @@ function AddProject() {
 
             if (token) {
                 const reqHeader = {
-                    "Content-Type": "multipart/form-data",
-                    "Authorization": `Bearer ${token}`
+                    "Content-Type":"multipart/form-data", "Authorization":`Bearer ${token}`
                 }
                 const result = await addProjectAPI(reqBody, reqHeader)
                 if (result.status === 200) {

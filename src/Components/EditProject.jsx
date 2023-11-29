@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { BASE_URL } from '../Services/baseurl'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { editProjectAPI } from '../Services/allAPI';
+import { editProjectResponseContext } from '../Contexts/ContextShare';
 
 
 function EditProject({ project }) {
+    const {editProjectResponse,setEditProjectResponse} = useContext(editProjectResponseContext)
     const [projectDetails, setProjectDetails] = useState({                                                                           
-        title:project.title, langauges:project.langauges, overview:project.overview, github:project.github, website:project.website, projectImage:""
+        id:project._id,title:project.title, langauges:project.langauges, overview:project.overview, github:project.github, website:project.website, projectImage:""
     })
     const [preview, setPreview] = useState("")
     const [show, setShow] = useState(false)
@@ -45,28 +47,28 @@ function EditProject({ project }) {
             const token = sessionStorage.getItem("token")
             if(preview){
                 const reqHeader = {
-                    "Content-Type": "multipart/form-data",
-                    "Authorization": `Bearer ${token}`
+                    "Content-Type":"multipart/form-data", "Authorization":`Bearer ${token}`
                 }
                 //api call
                 const result = await editProjectAPI(id,reqBody,reqHeader)
                 if (result.status===200) {
                     handleClose()
                     //pass response to MyProjects
+                    setEditProjectResponse(result.data)
                 }else{
                     console.log(result);
                     toast.error(result.response.data)
                 }
             }else{
                 const reqHeader = {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
+                    "Content-Type":"application/json", "Authorization":`Bearer ${token}`
                 }
                 //api call
                 const result = await editProjectAPI(id,reqBody,reqHeader)
                 if (result.status===200) {
                     handleClose()
                     //pass response to MyProjects
+                    setEditProjectResponse(result.data)
                 }else{
                     console.log(result);
                     toast.error(result.response.data)

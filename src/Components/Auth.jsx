@@ -1,16 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { loginAPI, registerAPI } from '../Services/allAPI'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { tokenAuthorisationContext } from '../Contexts/TokenAuth';
 
 function Auth({ register }) {
+    const {isAuthorized,setIsAuthorized} = useContext(tokenAuthorisationContext)
     const navigate = useNavigate()
     const [userData, setUserData] = useState({
         username:"", email:"", password:""
     })
     const isRegisterForm = register ? true : false
+
     const handleRegister = async (e)=>{
         e.preventDefault() 
         const {username,email,password} = userData
@@ -39,11 +42,12 @@ function Auth({ register }) {
             toast.info("please fill the form completely!!")
         }else{
             const result  = await loginAPI(userData)
-            console.log(result);
+            // console.log(result);
             if(result.status===200){
                 // toast.success(`${result.data.username}  has registered succefully!!! `)
                 sessionStorage.setItem("existingUser",JSON.stringify(result.data.existingUser))
                 sessionStorage.setItem("token",result.data.token)
+                setIsAuthorized(true)
                 setUserData({
                     email:"",password:""
                 })

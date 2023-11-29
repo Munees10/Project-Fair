@@ -32,7 +32,7 @@ function Footer() {
         <h4 style={{ color: "white" }}>Contact Us</h4>
         <div className="container sub d-flex mt-3">
           <input type="text" className="form-control" placeholder='Enter Your Email Id' />
-          <button className=' btn btn-dark ms-1 bg-info ps-2 me-2 '>Subscribe</button>
+          <button className=' btn btn-dark ms-1 bg-info ps-2 me-2 '><i class="fa-solid fa-arrow-right"></i></button>
         </div>
         <div className="icons fs-4 d-flex justify-content-evenly mt-3">
           <Link to={'https://mail.google.com/mail/u/0/#inbox'} style={{ textDecoration: "none", color: "white" }}><i className="fa-solid fa-envelope"></i></Link>
